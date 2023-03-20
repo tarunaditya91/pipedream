@@ -1,0 +1,110 @@
+reverse a linked list
+
+class Solution
+{
+    public:
+    //Function to reverse a linked list.
+    struct Node* reverseList(struct Node *head)
+    {
+        // code here
+        // return head of reversed list
+        struct Node*prev=NULL;
+        struct Node*curr=head;
+        struct Node* net=NULL;
+        while(curr!=NULL){
+            net=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=net;
+        }
+        head=prev;
+        return head;
+    }
+    
+};
+
+reverse a linked list by k
+class Solution
+{
+    public:
+    struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        if(head==NULL)return NULL;
+        struct node*prev=NULL;
+        struct node*next;
+        struct node*curr=head;
+        int count=0;
+        
+        while(curr!=NULL && count<k){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+            count++;
+        }
+        
+        if(next!=NULL){
+            head->next=reverse(next,k);
+        }
+        return prev;
+        
+    }
+};
+
+
+program to delete loop in linked list
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        Node*curr=head;
+        while(curr->next!=NULL){
+            
+            curr->data=-1;
+            
+            
+            if(curr->next->data==-1){
+                curr->next=NULL;
+                break;
+            }
+            curr=curr->next;
+        }
+       
+    }
+};
+
+find the starting point of the loop
+
+class Solution
+{
+    public:
+     //Function to find first node if the linked list has a loop.
+    int findFirstNode(Node* head)
+    {
+        // your code here
+        Node*fast=head;
+        Node*slow=head;
+        
+        while(fast!=NULL && fast->next!=NULL){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(fast==slow){
+                Node*slo2=head;
+                while(slo2!=slow){
+                    slo2=slo2->next;
+                    slow=slow->next;
+                    
+                }
+                return slo2->data;
+            }
+            
+            
+        }
+        return -1;
+    }
+}
